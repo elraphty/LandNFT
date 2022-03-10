@@ -25,12 +25,12 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 // 0x0198Ad341DB1b4aa530c18434d17eECEb5751968
 module.exports = {
   networks: {
-    ropsten: {
-      url: `https://ropsten.infura.io/v3/${infuraProjectId}`,
-      from: '0xb70C09b9b7CD1d8C03d554255854043C99F87155',
-      chainId: 3,
-      accounts: [pkey]
-    }
+    // ropsten: {
+    //   url: `https://ropsten.infura.io/v3/${infuraProjectId}`,
+    //   from: '0xb70C09b9b7CD1d8C03d554255854043C99F87155',
+    //   chainId: 3,
+    //   accounts: [pkey]
+    // }
   },
   solidity: {
     version: "0.8.4",

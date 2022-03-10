@@ -9,7 +9,7 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 // security against multiple request
 import "hardhat/console.sol";
 
-contract KBMarket is ReentrancyGuard {
+contract LandMarket is ReentrancyGuard {
     using Counters for Counters.Counter;
 
     // number of items minting, number of transaction not sold
