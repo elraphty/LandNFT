@@ -13,7 +13,7 @@ contract LandNFT is ERC721URIStorage {
     
     address contractAddress;
 
-    constructor(address marketplaceAddress) ERC721('KryotoBirds', 'KBIRDS') {
+    constructor(address marketplaceAddress) ERC721('LandNFT', 'LAND') {
         contractAddress = marketplaceAddress;
     }
 

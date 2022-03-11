@@ -71,7 +71,9 @@ export default function MintItem() {
     let transaction = await contract.mintToken(url);
     
     let tx = await transaction.wait();
+    console.log('Transactions ====', tx);
     let event = tx.events[0];
+    console.log('Transaction Events  ====', event);
 
     let value = event.args[2];
     let tokenId = value.toNumber();

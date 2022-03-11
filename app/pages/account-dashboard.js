@@ -8,8 +8,8 @@ import Web3Modal from 'web3modal'
 
 import { nftaddress, nftmarketaddress } from '../config'
 
-import NFT from '../../artifacts/contracts/LandNFT.sol/LandNFT.json'
-import KBMarket from '../../artifacts/contracts/LandMarket.sol/LandMarket.json'
+import NFT from '../artifacts/contracts/LandNFT.sol/LandNFT.json'
+import KBMarket from '../artifacts/contracts/LandMarket.sol/LandMarket.json'
 
 export default function AccountDashBoard() {
     // array of nfts
