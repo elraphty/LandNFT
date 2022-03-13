@@ -29,12 +29,12 @@ module.exports = {
       chainId: 1337,
       // url: '',
     },
-    // ropsten: {
-    //   url: `https://ropsten.infura.io/v3/${infuraProjectId}`,
-    //   from: '0xb70C09b9b7CD1d8C03d554255854043C99F87155',
-    //   chainId: 3,
-    //   accounts: [pkey]
-    // }
+    ropsten: {
+      url: `https://ropsten.infura.io/v3/${infuraProjectId}`,
+      from: '0xb70C09b9b7CD1d8C03d554255854043C99F87155',
+      chainId: 3,
+      accounts: [pkey]
+    }
   },
   solidity: {
     version: "0.8.4",

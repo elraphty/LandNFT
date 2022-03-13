@@ -36,20 +36,23 @@ export default function AccountDashBoard() {
 
     const items = await Promise.all(data.map(async i => {
       const tokenUri = await tokenContract.tokenURI(i.tokenId)
+      console.log('Token Uri ===', tokenUri);
       // we want get the token metadata - json 
       const meta = await axios.get(tokenUri)
-      let price = ethers.utils.formatUnits(i.price.toString(), 'ether')
+      let price = ethers.utils.formatUnits(i.landPrice.toString(), 'ether')
       let item = {
         price,
         tokenId: i.tokenId.toNumber(),
-        seller: i.seller,
-        owner: i.owner,
+        seller: i.landSeller,
+        owner: i.landOwner,
         image: meta.data.image, 
         name: meta.data.name,
         description: meta.data.description
       }
       return item
     }))
+
+    console.log('Items ===', items);
 
     // create a filtered aray of items that have been sold
     const soldItems = items.filter(i=> i.sold)

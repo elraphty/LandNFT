@@ -28,6 +28,7 @@ export default function MintItem() {
 
   async function onChange(e) {
     const file = e.target.files[0];
+    console.log('file ===', file)
     try {
       const added = await client.add(file, {
         progress: (prog) => console.log(`received: ${prog}`),
@@ -84,7 +85,7 @@ export default function MintItem() {
     let listingPrice = await contract.getListingPrice();
     listingPrice = listingPrice.toString();
 
-    transaction = await contract.makeMarketItem(nftaddress, tokenId, price, {
+    transaction = await contract.makeMarketItem(nftaddress, tokenId, price, "hello", "jj", "kkk",  {
       value: listingPrice,
     });
     await transaction.wait();

@@ -214,6 +214,7 @@ contract LandMarket is ReentrancyGuard {
                 currentIndex += 1;
             }
         }
+    
         return items;
     }
 }

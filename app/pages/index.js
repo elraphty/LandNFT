@@ -20,7 +20,10 @@ export default function Home() {
     // what we want to load:
     // ***provider, tokenContract, marketContract, data for our marketItems***
 
-    const provider = new ethers.providers.JsonRpcProvider()
+    // const provider = new ethers.providers.JsonRpcProvider()
+    const web3Modal = new Web3Modal()
+    const connection = await web3Modal.connect()
+    const provider = new ethers.providers.Web3Provider(connection)
     console.log('Provider ===', provider, nftaddress, nftmarketaddress);
     const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider)
     const marketContract = new ethers.Contract(nftmarketaddress, KBMarket.abi, provider)
@@ -32,13 +35,13 @@ export default function Home() {
       
       // we want get the token metadata - json 
       const meta = await axios.get(tokenUri)
-      let price = ethers.utils.formatUnits(i.price.toString(), 'ether')
+      let price = ethers.utils.formatUnits(i.landPrice.toString(), 'ether')
 
       let item = {
         price,
         tokenId: i.tokenId.toNumber(),
-        seller: i.seller,
-        owner: i.owner,
+        seller: i.landSeller,
+        owner: i.landOwner,
         image: meta.data.image, 
         name: meta.data.name,
         description: meta.data.description
