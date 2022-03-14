@@ -17,9 +17,12 @@ const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0');
 export default function MintItem() {
   const [fileUrl, setFileUrl] = useState(null);
   const [formInput, updateFormInput] = useState({
-    price: '',
+    price: 0.1,
     name: '',
     description: '',
+    landAddress: '',
+    landSize: '',
+    coordinates: '',
   });
   const router = useRouter();
 
@@ -28,7 +31,6 @@ export default function MintItem() {
 
   async function onChange(e) {
     const file = e.target.files[0];
-    console.log('file ===', file)
     try {
       const added = await client.add(file, {
         progress: (prog) => console.log(`received: ${prog}`),
@@ -72,9 +74,9 @@ export default function MintItem() {
     let transaction = await contract.mintToken(url);
     
     let tx = await transaction.wait();
-    console.log('Transactions ====', tx);
+    // console.log('Transactions ====', tx);
     let event = tx.events[0];
-    console.log('Transaction Events  ====', event);
+    // console.log('Transaction Events  ====', event);
 
     let value = event.args[2];
     let tokenId = value.toNumber();
@@ -85,7 +87,9 @@ export default function MintItem() {
     let listingPrice = await contract.getListingPrice();
     listingPrice = listingPrice.toString();
 
-    transaction = await contract.makeMarketItem(nftaddress, tokenId, price, "hello", "jj", "kkk",  {
+    const { landAddress, landSize, coordinates } = formInput;
+
+    transaction = await contract.makeMarketItem(nftaddress, tokenId, price, landAddress, coordinates, landSize,  {
       value: listingPrice,
     });
     await transaction.wait();
@@ -96,24 +100,46 @@ export default function MintItem() {
     <div className="flex justify-center">
       <div className="w-1/2 flex flex-col pb-12">
         <input
-          placeholder="Asset Name"
+          placeholder="Land Name"
           className="mt-8 border rounded p-4"
           onChange={(e) =>
             updateFormInput({ ...formInput, name: e.target.value })
           }
         />
         <textarea
-          placeholder="Asset Description"
+          placeholder="Land Description"
           className="mt-2 border rounded p-4"
           onChange={(e) =>
             updateFormInput({ ...formInput, description: e.target.value })
           }
         />
         <input
-          placeholder="Asset Price in Eth"
+          type="number"
+          placeholder="Land Price in Eth"
           className="mt-2 border rounded p-4"
           onChange={(e) =>
             updateFormInput({ ...formInput, price: e.target.value })
+          }
+        />
+        <textarea
+          placeholder="Land Address"
+          className="mt-2 border rounded p-4"
+          onChange={(e) =>
+            updateFormInput({ ...formInput, landAddress: e.target.value })
+          }
+        />
+        <input
+          placeholder="Land Size"
+          className="mt-8 border rounded p-4"
+          onChange={(e) =>
+            updateFormInput({ ...formInput, landSize: e.target.value })
+          }
+        />
+        <input
+          placeholder="Land Coordinates"
+          className="mt-8 border rounded p-4"
+          onChange={(e) =>
+            updateFormInput({ ...formInput, coordinates: e.target.value })
           }
         />
         <input type="file" name="Asset" className="mt-4" onChange={onChange} />{' '}
