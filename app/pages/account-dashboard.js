@@ -36,7 +36,7 @@ export default function AccountDashBoard() {
 
     const items = await Promise.all(data.map(async i => {
       const tokenUri = await tokenContract.tokenURI(i.tokenId)
-      console.log('Token Uri ===', tokenUri);
+   
       // we want get the token metadata - json 
       const meta = await axios.get(tokenUri)
       let price = ethers.utils.formatUnits(i.landPrice.toString(), 'ether')
@@ -47,12 +47,13 @@ export default function AccountDashBoard() {
         owner: i.landOwner,
         image: meta.data.image, 
         name: meta.data.name,
-        description: meta.data.description
+        description: meta.data.description,
+        address: i.landAddress,
+        size: i.landSize,
+        coordinates: i.coordinates,
       }
       return item
     }))
-
-    console.log('Items ===', items);
 
     // create a filtered aray of items that have been sold
     const soldItems = items.filter(i=> i.sold)
@@ -66,22 +67,24 @@ export default function AccountDashBoard() {
 
   return (
     <div className='p-4'>
-        <h1 style={{fontSize:'20px', color:'purple'}}>Tokens Minted</h1>
+        <h1 style={{fontSize:'20px', color:'purple'}}>Lands Minted</h1>
           <div className='px-4' style={{maxWidth: '1600px'}}>
           <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4'>
             {
               nfts.map((nft, i)=>(
                 <div key={i} className='border shadow rounded-x1 overflow-hidden'>
                   <img src={nft.image} />
-                  <div className='p-4'>
-                    <p style={{height:'64px'}} className='text-3x1 font-semibold'>{
+                  <div className='p-2'>
+                    <p style={{}} className='text-3x1 font-semibold'>{
                       nft.name}</p>
-                      <div style={{height:'72px', overflow:'hidden'}}>
+                      <div style={{}}>
                         <p className='text-gray-400'>{nft.description}</p>
+                        <p className="text-gray-400">{nft.address}</p>
+                        <p><span>{nft.size}</span> - <span>{nft.coordinates}</span></p>
                         </div>
                     </div>
-                    <div className='p-4 bg-black'>
-                        <p className='text-3x-1 mb-4 font-bold text-white'>{nft.price} ETH</p>
+                    <div className='p-2 bg-black'>
+                        <p className='text-3x-1 mb-2 font-bold text-white'>{nft.price} ETH</p>
                       </div>
                 </div>
               ))

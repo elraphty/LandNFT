@@ -15,12 +15,12 @@ function KryptoBirdMarketplace({Component, pageProps}) {
           </Link>
           <Link href='/mint-item'>
             <a className='mr-10'>
-              Mint Tokens
+              Mint Land
             </a>
           </Link>
           <Link href='/my-nfts'>
             <a className='mr-10'>
-              My NFts
+              My Land
             </a>
           </Link>
           <Link href='/account-dashboard'>
