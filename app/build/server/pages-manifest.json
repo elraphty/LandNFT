@@ -1,0 +1,11 @@
+{
+  "/_app": "pages/_app.js",
+  "/account-dashboard": "pages/account-dashboard.html",
+  "/api/hello": "pages/api/hello.js",
+  "/": "pages/index.html",
+  "/mint-item": "pages/mint-item.html",
+  "/my-nfts": "pages/my-nfts.html",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js",
+  "/404": "pages/404.html"
+}
